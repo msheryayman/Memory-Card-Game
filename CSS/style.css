@@ -1,0 +1,108 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family:"Open Sans", sans-serif;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background-color: #c0de9e;
+}
+.memory-card{
+    height: 400px;
+    width: 400px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.cards{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(80px,1fr));
+    gap: 10px;
+    padding: 20px;
+    background-color: #eee;
+}
+.card,
+.face{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cards .card{
+    cursor: pointer;
+    position: relative;
+    perspective: 800px;
+    transform-style: preserve-3d;
+}
+.card.shake{
+    animation: shake 0.35s ease-in-out;
+}
+@keyframes shake {
+    0%, 100%{
+        transform: translateX(0);
+    }
+    20%{
+        transform: translateX(-13px);
+    }
+    40%{
+        transform: translateX(13px);
+    }
+    60%{
+        transform: translateX(-8px);
+    }
+    80%{
+        transform: translateX(8px);
+    }
+}
+.card .face{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    background-color:#fff;
+    border-radius: 7px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    backface-visibility: hidden;
+    transition: transform 0.25s linear;
+}
+.memory-card .cards .front{
+    background-color: #333;
+}
+.memory-card .cards .front::after{
+    content: "!";
+    color: white;
+    font-size: 45px;
+    font-weight: bold;
+}
+.memory-card .cards .card .back{
+    transform: rotateY(-180deg);
+}
+.memory-card .cards .card .back img{
+    max-width: 45px;
+}
+.memory-card .cards .card.flip .front{
+    transform: rotateY(180deg)
+}
+.memory-card .cards .card.flip .back{
+    transform: rotateY(0)
+}
+.info-container{
+    width: 400px;
+    background-color: #f8f8f8;
+    border: 1px solid #579b09;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 18px;
+}
+.info-container button{
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 18px;
+}
